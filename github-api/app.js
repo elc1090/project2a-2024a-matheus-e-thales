@@ -1,14 +1,18 @@
+// Function to fetch commits for a specific repository with pagination
 function requestCommits(username, repoName, page = 1, perPage = 10) {
     return fetch(`https://api.github.com/repos/${username}/${repoName}/commits?page=${page}&per_page=${perPage}`);
 }
 
+// Function to display commits with pagination
 function displayCommits(username, repoName, page = 1) {
     const commitsContainer = document.getElementById('commitsContainer');
-    commitsContainer.innerHTML = '';
+    commitsContainer.innerHTML = ''; // Clear previous commits
 
+    // Fetch commits
     requestCommits(username, repoName, page)
         .then(response => response.json())
         .then(commits => {
+            // Display commits
             commits.forEach(commit => {
                 const commitItem = document.createElement('div');
                 commitItem.classList.add('commit-item');
@@ -22,14 +26,17 @@ function displayCommits(username, repoName, page = 1) {
                 commitsContainer.appendChild(commitItem);
             });
 
+            // Display pagination controls
             displayPagination(username, repoName, page);
         })
         .catch(error => {
             console.error('Error fetching commits:', error);
+            // Display error message
             commitsContainer.innerHTML = `<p>Error fetching commits. Please try again.</p>`;
         });
 }
 
+// Function to display pagination controls
 function displayPagination(username, repoName, currentPage) {
     const paginationContainer = document.getElementById('paginationContainer');
     paginationContainer.innerHTML = '';
@@ -51,6 +58,7 @@ function displayPagination(username, repoName, currentPage) {
     paginationContainer.appendChild(nextButton);
 }
 
+// Event listener for form submission
 const gitHubForm = document.getElementById('gitHubForm');
 gitHubForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -59,5 +67,6 @@ gitHubForm.addEventListener('submit', (e) => {
     const gitHubUsername = usernameInput.value;
     const repoName = repoInput.value;
 
+    // Display commits for the first page
     displayCommits(gitHubUsername, repoName);
 });

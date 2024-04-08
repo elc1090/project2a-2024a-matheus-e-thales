@@ -1,6 +1,6 @@
 # Projeto2a: GitHub API e DOM Manipulation
 
-![Screenshot do projeto](https://prnt.sc/gQAphx1bl1Pj "Screenshot do projeto").
+![Screenshot do projeto](https://img001.prntscr.com/file/img001/cWj8HdvmSkOvMuL6I1VZRA.png "Screenshot do projeto").
 
 
 #### Deploy
